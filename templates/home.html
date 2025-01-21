@@ -24,7 +24,7 @@
             overflow: hidden; } 
         
         .login { 
-            background-color: #fff; 
+/*             background-color: #fff; 
             padding: 20px; 
             border-radius: 10px; 
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
@@ -33,8 +33,13 @@
             margin: 20px; 
             overflow-y: auto; 
             max-height: 90vh; 
-            z-index: 10; /* Thus ensures that login box is above particles */ 
-            position: relative; } 
+            z-index: 10; 
+            position: relative; */
+            z-index: 10;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); }
         
         .login h1 { 
             font-family: 'Pacifico', cursive; 
