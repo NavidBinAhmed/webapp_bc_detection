@@ -1,7 +1,14 @@
 # End-end Breast Cancer Predictor API using Machine Learning and Render by @ Md Mijanul Haque
 
+### README Will be updated
 
--- this README file will be updated by the developer Md Mijanul Haque.
+## Tools
+- ParticleJS, ThreeJS
+- Python
+- Flask
+- Render
+- Machine Learning
 
+  
 # Live Link:
 https://bcp-zxj6.onrender.com/
