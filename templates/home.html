@@ -107,10 +107,11 @@
     <!-- Particles.js script -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-    particlesJS.load('particles-js', 'particles.json', function() {
+    particlesJS.load('particles-js', '{{ url_for('static', filename='particles.json') }}', function() {
         console.log('particles.js config loaded');
     });
     </script>
+
 
     <!-- Three.js script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
