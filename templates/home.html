@@ -9,6 +9,153 @@
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel="stylesheet" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel="stylesheet" type='text/css'>
     
+    <style>
+        body {
+            font-family: 'Arimo', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .login {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 90%;
+            margin: 20px;
+            overflow-y: auto;
+            max-height: 90vh;
+            z-index: 10; /* Ensure login box is above particles */
+        }
+        .login h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .login h3 {
+            font-family: 'Hind', sans-serif;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .login input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%;
+            font-size: 18px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #b61924;
+            background-image: url('');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 1; /* Ensure particles are behind content */
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="login">
+        <h1>Breast Cancer Predictor</h1>
+        <h3>Follow the range to input data</h3>
+        <form action="{{ url_for('predict') }}" method="post">
+            <input type="text" name="radius_mean" placeholder="radius mean (1-99)" required="required" /><br>
+            <input type="text" name="texture_mean" placeholder="texture mean (1-99)" required="required" /><br>
+            <input type="text" name="smoothness_mean" placeholder="smoothness mean (0.01-5.15)" required="required" /><br>
+            <input type="text" name="compactness_mean" placeholder="compactness mean (0.01-2.15)" required="required" /><br>
+            <input type="text" name="symmetry_mean" placeholder="symmetry mean (0.1-2.15)" required="required" /><br>
+            <input type="text" name="fractal_dimension_mean" placeholder="fractal dimension mean (0.1-1.0)" required="required" /><br>
+            <input type="text" name="radius_se" placeholder="radius standard error (0.1-10)" required="required" /><br>
+            <input type="text" name="texture_se" placeholder="texture standard error (0.1-10)" required="required" /><br>
+            <input type="text" name="smoothness_se" placeholder="smoothness standard error (0.001-2.0)" required="required" /><br>
+            <input type="text" name="compactness_se" placeholder="compactness standard error (0.001-5.0)" required="required" /><br>
+            <input type="text" name="symmetry_se" placeholder="symmetry standard error (0.001-1.0)" required="required" /><br>
+            <input type="text" name="fractal_dimension_se" placeholder="fractal dimension standard error (0-1.0)" required="required" /><br>
+            <button type="submit" class="btn btn-primary btn-black btn-large">Predict</button>
+        </form>
+        <br>
+        <div>
+            {{ prediction_text }}
+        </div>
+    </div>
+
+    <!-- Particles.js script -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('particles.js config loaded');
+        });
+    </script>
+
+    <!-- Three.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Three.js code to create visual effects
+        // Example: create a rotating cube
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var geometry = new THREE.BoxGeometry();
+        var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        var animate = function() {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    </script>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Predictor API</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel="stylesheet" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel="stylesheet" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel="stylesheet" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel="stylesheet" type='text/css'>
+    
     <style> 
         body { 
             font-family: 'Arimo', sans-serif; 
@@ -96,4 +243,5 @@
     </div>
 
 </body>
-</html>
+</html> 
+-->
