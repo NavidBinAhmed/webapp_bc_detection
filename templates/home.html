@@ -33,7 +33,7 @@
             margin: 20px; 
             overflow-y: auto; 
             max-height: 90vh; 
-            z-index: 1; /* Thus ensures that login box is above particles */ 
+            z-index: 10; /* Thus ensures that login box is above particles */ 
             position: relative; } 
         
         .login h1 { 
@@ -78,6 +78,14 @@
             background-repeat: no-repeat; 
             background-size: cover; 
             z-index: 1; /* this ensures particles are behind content */ } 
+
+        #three-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2; /* ensures that three.js is behind the form but above particles */ }
     </style>
     
 </head>
